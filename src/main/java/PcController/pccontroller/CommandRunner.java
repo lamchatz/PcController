@@ -8,9 +8,11 @@ import java.time.format.DateTimeFormatter;
 
 public class CommandRunner {
 
-    public static final String CMD_EXE = "cmd.exe";
-    public static final String C = "/c";
-    public static final String CONTROLLER_LOG = "controller.log";
+    private static final String CMD_EXE = "cmd.exe";
+    private static final String C = "/c";
+
+    private static final String CONTROLLER_LOG = "C:/Users/LAMPROS/Desktop/programming/Java/pccontroller/controller.log";
+
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private CommandRunner() {
