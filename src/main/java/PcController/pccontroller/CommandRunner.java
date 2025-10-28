@@ -14,8 +14,11 @@ public class CommandRunner {
     private static final String CONTROLLER_LOG = "C:/Users/LAMPROS/Desktop/programming/Java/pccontroller/controller.log";
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static final String CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";
+    public static final String CHROME_PROFILE = "C:/ChromeProfile";
 
     private CommandRunner() {
+        super();
     }
 
     private static void log(String message) {
@@ -49,6 +52,11 @@ public class CommandRunner {
 
     public static void startAge() throws IOException, InterruptedException {
         runCommand("cd C:\\ && start age.url && start Discord.lnk");
+    }
+
+    public static void openChromeTab(String url) throws IOException, InterruptedException {
+        runCommand(String.format("\"%s\" --user-data-dir=\"%s\" --profile-directory=Default --new-tab %s",
+                CHROME, CHROME_PROFILE, url));
     }
 
 }

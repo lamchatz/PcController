@@ -1,18 +1,19 @@
 package PcController.pccontroller.api;
 
 import PcController.pccontroller.CommandRunner;
+import PcController.pccontroller.enums.URL;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
 @RestController
 public class AndroidAPI {
-    @GetMapping("/hello")
-    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name);
+    @GetMapping("/test")
+    public boolean test() {
+        return true;
     }
 
     @GetMapping("/hey")
@@ -29,6 +30,17 @@ public class AndroidAPI {
     @PostMapping("/spotify")
     public boolean spotify() {
         return runSafely(CommandRunner::startSpotify);
+    }
+
+    @PostMapping("/open/{name}")
+    public boolean open (@PathVariable String name){
+        try {
+            URL url = URL.valueOf(name.toUpperCase());
+
+            return runSafely(() -> CommandRunner.openChromeTab(url.getLink()));
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
     private boolean runSafely(RunnableWithException action) {
